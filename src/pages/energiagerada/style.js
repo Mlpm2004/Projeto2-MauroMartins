@@ -1,28 +1,30 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
-export const Total = styled.div`
-    display: flex;
-    justify-content:flex-end;`
-;
-
-export const TableImg = styled.img`
-  height: 100px;
+export const Container = styled.div`
+    margin:0 auto;
+    
+    display:flex;
+    flex-direction:row;
+    
+`;
+export const ContainerMenu = styled.div`
+    display:flex;
+    width:250px;
+    margin-rigth:50px;
+`;
+export const ContainerPage = styled.div`
+    display:flex;
+    flex-direction:column;
+    width:100%
 `;
 
-export const TableCart = styled.table`
-  width: 100%;
-  background: #FFF;
-  padding: 10px;
-  border-radius: 10px;
-  margin: 10px 0;
-`;
-export const BotaoDesc= styled.button `
-    background-color: rgb(19, 19, 66);
-    height: 50px;
-    border:1px;
-    border-radius: 0.5rem;
-    color:floralwhite;
-    font-size: 24px;
-    font-weight: bold;
+export const ContainerFundo = styled.div`
+    background-color: aliceblue;
+    width:300px;
+    padding: 20px;
 
-`
+`;
+
+
+
+

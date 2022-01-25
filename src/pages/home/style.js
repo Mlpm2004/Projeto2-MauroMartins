@@ -1,26 +1,17 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
-export const Imagem = styled.img`
-    width: 150px;
+export const Container = styled.div`
+    margin:0 auto;
+    width:80%;
+    display:flex;
+    flex-direction:row;
+    
 `;
-
-export const ItemLivro = styled.div`
-    margin:10px;
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    gap:10px;
-    justify-content: center;
-    border: 1px solid;
-    border-radius: 0rem 0rem 1rem 1rem;
-    background-color: floralwhite;
+export const ContainerMenu = styled.div`
+    display:flex;
+    width:250px;
+    margin-rigth:50px;
 `;
-
-
-
-export const ContainerHome = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;`
-;
+export const ContainerPage = styled.div`
+    Display:flex;
+`;

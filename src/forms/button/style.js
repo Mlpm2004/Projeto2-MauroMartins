@@ -9,11 +9,15 @@ export const Externo= styled.div`
 `;
 
 export const Buttonformat=styled.button`
-  background: ${(props) => props.cor};
+  background: ${(props) => props.colorBackground};
   color: ${(props) => props.colorText};
-  height: 50px;
   width: ${(props) => props.width};
-       
+  name: ${(props) => props.name};
+  height: 40px;
+  border:1px solid green;
+  border-radius:0.3rem;
+  text-decoration:none;
+      
 `;
 
 

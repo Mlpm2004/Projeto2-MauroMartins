@@ -4,8 +4,8 @@ function Select({label, options, description,...otherProps}){
     return (
         <Externo>
             <SelectDescription>{label}</SelectDescription>
-            <Selectformat {...otherProps}>
-               <option disabled value="">{description}</option>
+            <Selectformat   {...otherProps}>
+               <option disabled value="" selected>{description} </option>
                {options.map(option => <option
                 key={option.valor}
                 value={option.valor}>

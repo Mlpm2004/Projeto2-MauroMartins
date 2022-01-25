@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
     margin:0 auto;
-    
+    width:80%;
     display:flex;
     flex-direction:row;
     
@@ -15,12 +15,11 @@ export const ContainerMenu = styled.div`
 export const ContainerPage = styled.div`
     display:flex;
     flex-direction:column;
-  width:100%
+
 `;
 
 export const ContainerFundo = styled.div`
     background-color: aliceblue;
-    
     padding: 20px;
 
 `;
@@ -34,13 +33,13 @@ export const Table = styled.table`
 
 export const THeader = styled.thead`
   background: #fafcf9c2;
+  th {
+  
+  text-align: left;
+  padding: 12px;
+  }
 `;
 
-export const AlignRigth = styled.div`
-  display:flex;
-  flex-direction-row;
-  justify-content: flex-end;
-`;
 export const TBody = styled.tbody`
 `;
 
@@ -53,5 +52,7 @@ export const RowItem = styled.td`
   width: ${(props) => props.width};
 `;
 
-
+export const Retformat = styled.div`
+  text-decoration: none;
+`;
 
