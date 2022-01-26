@@ -25,8 +25,8 @@ export const BotaoMenu=styled.div`
     border:1px solid green;
     border-radius:0.3rem;
     &:hover{
-        color:withe;
-        background-color:"#4CAF50";
+        color:white;
+        background-color:#4CAF50;
     }
 `;
 export const Centraliza=styled.div`

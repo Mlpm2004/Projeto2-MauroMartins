@@ -4,10 +4,10 @@ import Login from './pages/Login'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Routes, Route } from 'react-router-dom';
-import Dashboard from './pages/dashboard';
-import UnidadeConsumidora from './pages/unidadeconsumidora';
-import EnergiaGerada from './pages/energiagerada';
-import Cadastro from './pages/editaunidade';
+import Dashboard from './pages/Dashboard';
+import UnidadeConsumidora from './pages/Unidadeconsumidora';
+import EnergiaGerada from './pages/Energiagerada';
+import Cadastro from './pages/Editaunidade';
 function App() {
   return (
 // Routes cria as rotas
