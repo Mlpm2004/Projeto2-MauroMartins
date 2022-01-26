@@ -1,3 +1,6 @@
 # Projeto2-MauroMartins
 Projeto2
-Preparando Ambiente
+No login use 
+    email - mpmartins@bol.com.br
+    senha - mpmartins
+
