@@ -5,7 +5,10 @@ export const Externo= styled.div`
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    margin:10px;
+    margin-left:5px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
 `;
 
 export const Checkformat=styled.input`

@@ -59,8 +59,8 @@ export const ContainerSuperior=styled.div`
 `;
 export const ContainerInferior=styled.div`
   display:flex;
-  flex-direction-row;
-  justify-content: flex-end;
+  justify-content:center;
+  max-width: 800px;
 `;
 export const Card=styled.div`
   width:20%;

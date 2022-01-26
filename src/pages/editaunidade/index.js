@@ -4,8 +4,7 @@ import Menu from '../../components/Menu';
 import Input from '../../forms/input';
 import Check from "../../forms/checkbox";
 import {useParams} from 'react-router-dom';
-import {ContainerPage,Container,ContainerMenu,ContainerFundo} from './style'
-import { Table, THeader, TBody, CartPhoto, Row, RowItem,Retformat } from './style';
+import {ContainerPage,Container,ContainerMenu,ContainerFundo,DivComponent,DivComponentButton} from './style'
 import Button from "../../forms/button";
 import {toast} from 'react-toastify';
 function Cadastro(){
@@ -38,7 +37,8 @@ function Cadastro(){
             })
         }
     },[unit])
-    async function handleSaveUnit(){
+    async function handleSaveUnit(event){
+        event.preventDefault();
         if (params.id!=undefined){
             try {
                 await fetch(urlAtualiza, {
@@ -54,30 +54,40 @@ function Cadastro(){
                         ativo:ativo.toString()
                     })
                 })
+                toast.success('Unidade Alterada')
             } catch (error) {
             }
         }else{
-            try {
-                await fetch(urlInsere,
-                    {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        apelido: apelido,
-                        local: local,
-                        marca: marca,
-                        modelo: modelo,
-                        ativo: ativo.toString()
-                    })},
-                )
-            } catch (error) {
+            if (apelido=="") {
+                toast.warning('Campo Apelido não pode ser vazio')
+            }else if (local=="") {
+                toast.warning('Campo Local não pode ser vazio')
+            }else if (marca=="") {
+                toast.warning('Campo Marca não pode ser vazio')
+            }else if (modelo=="") {
+                toast.warning('Campo Modelo não pode ser vazio')
+            }else{                    
+                try {
+                    await fetch(urlInsere,
+                        {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            apelido: apelido,
+                            local: local,
+                            marca: marca,
+                            modelo: modelo,
+                            ativo: ativo.toString()
+                        })},
+                    )
+                    toast.success('Unidade Cadastrada')
+                } catch (error) {
+                    
+                }
                 
             }
         }
     }
-
-
-
     return (
         <Container>
             <ContainerMenu>
@@ -88,46 +98,58 @@ function Cadastro(){
                 <ContainerFundo>
                     <h3>Cadastro de Unidade Geradora</h3>
                     
-                        <form  key='7'>
-                            <Input
-                                label="Apelido"
-                                key='1'
-                                value={apelido}
-                                onChange={(e)=>setApelido(e.target.value)}
-                            />
-                            <Input
-                                label="Local"
-                                 key='2'
-                               value={local}
-                                onChange={(e)=>setLocal(e.target.value)}
-                            />
-                            <Input
-                                label="Marca"
-                                key='3'
-                                value={marca}
-                                onChange={(e)=>setMarca(e.target.value)}
-                            />
-                            <Input
-                                label="Modelo"
-                                key='4'
-                                value={modelo}
-                                onChange={(e)=>setModelo(e.target.value)}
-                            />
-                            <Check
-                                label="Ativo"
-                                type="checkbox"
-                                checked={ativo}
-                                key='5'
-                                onChange={(e)=>setAtivo(e.target.checked)}
-                            />
-                            <Button
-                                colorText="#fafcf9"
-                                colorBackground="#8175eb"
-                                width="100px"
-                                key='6'
-                                onClick={() => handleSaveUnit()}
+                        <form  onSubmit={handleSaveUnit} key='7'>
+                            <DivComponent>
+                                <Input
+                                    label="Apelido"
+                                    key='1'
+                                    value={apelido}
+                                    onChange={(e)=>setApelido(e.target.value)}
+                                />
+                            </DivComponent>
+                            <DivComponent>
+                                <Input
+                                    label="Local"
+                                    key='2'
+                                    value={local}
+                                    onChange={(e)=>setLocal(e.target.value)}
+                                />
+                            </DivComponent>
+                            <DivComponent>
+                                <Input
+                                    label="Marca"
+                                    key='3'
+                                    value={marca}
+                                    onChange={(e)=>setMarca(e.target.value)}
+                                />
+                            </DivComponent>
+                            <DivComponent>
+                                <Input
+                                    label="Modelo"
+                                    key='4'
+                                    value={modelo}
+                                    onChange={(e)=>setModelo(e.target.value)}
+                                />
+                            </DivComponent>
+                            <DivComponent>
+                                <Check
+                                    label="Ativo"
+                                    type="checkbox"
+                                    checked={ativo}
+                                    key='5'
+                                    onChange={(e)=>setAtivo(e.target.checked)}
+                                />
+                            </DivComponent>
+                            <DivComponentButton>
+                                <Button
+                                    colorText="#fafcf9"
+                                    colorBackground="#8175eb"
+                                    width="150px"
+                                    key='6'
+                                    type="submit"
 
-                            >Salvar</Button>
+                                >Salvar</Button>
+                            </DivComponentButton>
                         </form>
                     
                </ContainerFundo>

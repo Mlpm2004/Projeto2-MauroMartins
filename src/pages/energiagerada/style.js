@@ -24,6 +24,16 @@ export const ContainerFundo = styled.div`
     padding: 20px;
 
 `;
+export const DivComponent = styled.div`
+    margin-bottom:10px;
+
+`;
+export const DivComponentButton = styled.div`
+    display:flex;
+    justify-content:center;
+
+`;
+
 
 
 

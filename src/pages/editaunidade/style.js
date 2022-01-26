@@ -23,36 +23,13 @@ export const ContainerFundo = styled.div`
     padding: 20px;
 
 `;
-export const Table = styled.table`
-  width: 100%;
-  background: #FFF;
-  padding: 10px;
-  border-radius: 10px;
-  margin: 10px 0;
-`;
+export const DivComponent = styled.div`
+    margin-bottom:10px;
 
-export const THeader = styled.thead`
-  background: #fafcf9c2;
-  th {
-  
-  text-align: left;
-  padding: 12px;
-  }
 `;
+export const DivComponentButton = styled.div`
+    display:flex;
+    justify-content:center;
 
-export const TBody = styled.tbody`
-`;
-
-export const Row = styled.tr`
-`;
-
-export const RowItem = styled.td`
-  padding: 12px;
-  border-bottom: 1px solid #585656;
-  width: ${(props) => props.width};
-`;
-
-export const Retformat = styled.div`
-  text-decoration: none;
 `;
 

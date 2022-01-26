@@ -14,25 +14,30 @@ export const Logotipo=styled.img`
 
 export const BotaoMenu=styled.div`
     display: flex;
-    height: 50px;
     justify-content: center;
     align-items: center;
     padding: 5px;
+    margin:10px;
     background: white;
     color: gray;
-    width: 180
+    width: 150px;
     height: 50px;
     border:1px solid green;
     border-radius:0.3rem;
-    text-decoration: none;
-    &:focus{
+    &:hover{
         color:withe;
-        background-color:"#4CAF50"
+        background-color:"#4CAF50";
     }
 `;
-
+export const Centraliza=styled.div`
+    display: flex;
+    justify-content: center;
+    text-align: center;
+`;
 export const LinhaBotao=styled.div`
+    display: flex;
+    justify-content: center;
     margin:20px;
     heigth:50px;
-text-decoration: none
+
 `;

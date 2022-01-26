@@ -14,7 +14,7 @@ function Login(){
     const { username, addName } = useContext(LoginContext)
     const history = useNavigate()
     function handleRedirect() {
-        history('/home')
+        history('/dashboard')
     }
     async function handleSubmit(event) {
         event.preventDefault();
@@ -28,8 +28,13 @@ function Login(){
                 addName(data.map((nome)=>nome.nome))
                 handleRedirect()
             }else{
-                console.log(senha);
-                toast.warning('Usuario ou Senha Incorretos')
+                if (senha==""){
+                    toast.warning('Campo Senha não pode ser vazio')
+                }else if(email==""){
+                    toast.warning('Campo Email não pode ser vazio')
+                } else{
+                    toast.warning('Usuario ou Senha Incorretos')
+                }
             }
         
         } catch (error) {
