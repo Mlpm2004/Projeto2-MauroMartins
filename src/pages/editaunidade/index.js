@@ -4,7 +4,8 @@ import Menu from '../../components/Menu';
 import Input from '../../forms/input';
 import Check from "../../forms/checkbox";
 import {useParams} from 'react-router-dom';
-import {ContainerPage,Container,ContainerMenu,ContainerFundo,DivComponent,DivComponentButton} from './style'
+import {ContainerPage,Container,ContainerMenu} from '../../style'
+import {DivComponent,DivComponentButton,ContainerFundo} from './style'
 import Button from "../../forms/button";
 import {toast} from 'react-toastify';
 function Cadastro(){
@@ -18,7 +19,7 @@ function Cadastro(){
     const urlBusca=`http://localhost:3333/unidades?id=${params.id}`;
     const urlAtualiza=`http://localhost:3333/unidades/${params.id}`;
     const urlInsere=`http://localhost:3333/unidades`;
-    useEffect(()=>{
+    useEffect(()=>{// Busca dados da unidade selecionada
         async function handleGetUnit(){
             const response = await fetch(urlBusca);
             const data = await response.json();
@@ -26,8 +27,7 @@ function Cadastro(){
         }
         handleGetUnit();
     },[])
-    useEffect(()=>{
-        if (params){
+    useEffect(()=>{//Após os dados serem carregados este hook é acionado para preencher os campos do form
             unit.map(item => {
                 (item.ativo=="true")?setAtivo(true):setAtivo(false) 
                 setApelido(item.apelido)
@@ -35,12 +35,11 @@ function Cadastro(){
                 setMarca(item.marca)
                 setModelo(item.modelo)
             })
-        }
     },[unit])
-    async function handleSaveUnit(event){
+    async function handleSaveUnit(event){//Atualiza ou insere dados do JSON
         event.preventDefault();
-        if (params.id!=undefined){
-            try {
+        if (params.id!=undefined){//Verifica se é atualização ou nova unidade
+            try {//Processo de atualização
                 await fetch(urlAtualiza, {
                     method: "PUT",
                     headers: {
@@ -57,8 +56,8 @@ function Cadastro(){
                 toast.success('Unidade Alterada')
             } catch (error) {
             }
-        }else{
-            if (apelido=="") {
+        }else{ //Processo de inserção de nova unidade
+            if (apelido=="") { //Verifica se todos os campos foram preenchidos
                 toast.warning('Campo Apelido não pode ser vazio')
             }else if (local=="") {
                 toast.warning('Campo Local não pode ser vazio')
@@ -67,7 +66,7 @@ function Cadastro(){
             }else if (modelo=="") {
                 toast.warning('Campo Modelo não pode ser vazio')
             }else{                    
-                try {
+                try {//Insere nova unidade no JSON
                     await fetch(urlInsere,
                         {
                         method: 'POST',
@@ -81,6 +80,12 @@ function Cadastro(){
                         })},
                     )
                     toast.success('Unidade Cadastrada')
+                    // limpa campos para nova inserção
+                    setApelido('')
+                    setLocal('')
+                    setMarca('')
+                    setModelo('')
+                    setAtivo('')
                 } catch (error) {
                     
                 }
@@ -97,7 +102,6 @@ function Cadastro(){
                 <h2>Unidades</h2>
                 <ContainerFundo>
                     <h3>Cadastro de Unidade Geradora</h3>
-                    
                         <form  onSubmit={handleSaveUnit} key='7'>
                             <DivComponent>
                                 <Input
@@ -151,7 +155,6 @@ function Cadastro(){
                                 >Salvar</Button>
                             </DivComponentButton>
                         </form>
-                    
                </ContainerFundo>
             </ContainerPage>
         </Container>

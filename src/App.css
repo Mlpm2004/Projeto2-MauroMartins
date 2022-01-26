@@ -1,8 +1,9 @@
+
+/* remove estilo padrão de links*/
 .remove{
     text-decoration: none;
-
 }
-
+/* remove setas de inputs type number*/
 input[type=number]::-webkit-inner-spin-button,
     input[type=number]::-webkit-outer-spin-button {
         -webkit-appearance: none;

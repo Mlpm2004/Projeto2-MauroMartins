@@ -1,27 +1,24 @@
 import styled from "styled-components";
 
-export const ContainerBox=styled.div`
+export const Container = styled.div`
+    margin:0 auto;
+    display:flex;
+    flex-direction:row;
+`;
+
+export const ContainerMenu = styled.div`
+    display:flex;
+    width:250px;
+    margin-rigth:50px;
+`;
+
+export const ContainerPage = styled.div`
     display:flex;
     flex-direction:column;
-    align-content:center;
-    width:400px;
-    border:0.5px solid;
-    border-radius:0.5rem;
-    background-color:#f8f6f6;
-    margin:20px;
-    padding:20px
-
-`
-export const Container=styled.div`
-    display:flex;
-    justify-content:center
-
+    width:100%
 `;
 
-export const LinkFormat=styled.link`
-    font-size:16px;
-    font-weight: bold;
-    padding: 5px;
-    text-decoration:none;
+export const ContainerFundo = styled.div`
+    background-color: aliceblue;
+    padding: 20px;
 `;
-

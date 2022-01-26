@@ -1,7 +1,8 @@
 import React  from "react";
 import  {useEffect,useState} from "react";
 import Menu from '../../components/Menu';
-import {InfoCard,ContainerPage,Container,ContainerMenu,ContainerFundo,ContainerSuperior,ContainerInferior,Card,TituloCard} from './style'
+import {ContainerPage,Container,ContainerMenu,ContainerFundo} from '../../style'
+import {InfoCard,ContainerSuperior,ContainerInferior,Card,TituloCard,CentralizaGrafico} from './style'
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -13,8 +14,6 @@ import {
   Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-
-
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -24,7 +23,7 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-
+// RENDERIZA TELA DASHBOARD
 function Dashboard(){
     const urlBuscaGeracao=`http://localhost:3333/geracoes`;
     const [unidades, setUnidades] = useState([])
@@ -36,13 +35,11 @@ function Dashboard(){
     const dt = new Date();
     let somaConsumoMes=[]
     const mesCorrenteInt = parseInt(String(dt.getMonth() + 1). padStart(2, '0'));
-    const mesCorrenteStr = String(dt.getMonth() + 1). padStart(2, '0');
-//    const mesCorrenteInt = 12
-//    const mesCorrenteStr = '12'
     const anoCorrente = dt.getFullYear();
     const mesesAno =["Jan", "Feb", "Mar", "Apr", "Mai", "Jun","Jul","Ago","Set","Out","Nov","Dez"]
     let reiniciaMes=11
     let meses=[]
+    // O gráfico deve mostrar os últimos 12 meses
     for (let i=0;i<=11;i++){ //REORGANIZA VETOR DE MESES CONFORME O MES CORRENTE
         if  ((mesCorrenteInt-i)>=1) {
             meses.push(mesesAno[mesCorrenteInt-1-i])
@@ -50,9 +47,9 @@ function Dashboard(){
             meses.push(mesesAno[reiniciaMes])
             reiniciaMes--
         } 
-        
     }
     meses.reverse()
+    // cria array com os dados necessários para o gráfico
     useEffect(()=>{
         async function handleGetPower(){
             const response = await fetch(urlBuscaGeracao);
@@ -67,34 +64,38 @@ function Dashboard(){
         }
         handleGetPower();
     },[])
+    // array de dados pronto dispara o próximo useEffect que filtra e soma as informações de consumo mês a mês e cria array para plotagem
     useEffect(()=>{
         let reiniciaMes=12
         let mes=""
         function somaTotalMes(){
             for (let i=1;i<=12;i++){ //REORGANIZA VETOR DE MESES CONFORME O MES CORRENTE
-                if  ((mesCorrenteInt)>=i) {
-                    ((mesCorrenteInt)<=9)?mes='0'+(mesCorrenteInt).toString():mes=(mesCorrenteInt).toString()
-                    const consumoMes = potenciaConsumida.filter((unidade)=>unidade.periodo==anoCorrente+"-"+(mes))
-                    const somaUnidades = consumoMes.reduce((a,b) => a+parseInt(b.total),0)
-                    somaConsumoMes.push(somaUnidades)
-               }else{
-                    (reiniciaMes<=9)?mes='0'+reiniciaMes.toString():mes=reiniciaMes.toString()
-                    const consumoMes = potenciaConsumida.filter((unidade)=>unidade.periodo==(anoCorrente-1)+"-"+(mes))
-                    const somaUnidades = consumoMes.reduce((a,b) => a+parseInt(b.total),0)
-                    somaConsumoMes.push(somaUnidades)
+                if  ((mesCorrenteInt)>=i) { // organiza dados do ano corrente
+                    mes=mesDoisDigitos(mesCorrenteInt) 
+                    somaTotalInsereVetor(potenciaConsumida.filter((unidade)=>unidade.periodo==anoCorrente+"-"+(mes)))
+               }else{ // organiza dados no ano anterior
+                    mes=mesDoisDigitos(reiniciaMes)
+                    somaTotalInsereVetor(potenciaConsumida.filter((unidade)=>unidade.periodo==(anoCorrente-1)+"-"+(mes)))
                     reiniciaMes--
-                    console.log((mesCorrenteInt-i).toString())
                 } 
-                 
             }
             setValoresMeses(somaConsumoMes.reverse())
+            function mesDoisDigitos(valor){ //Transforma mes integer em mes string com 2 digitos
+                if ((valor)<=9){
+                    return '0'+(valor).toString()
+                }else{
+                    return valor.toString()
+                }
+            }
+            function somaTotalInsereVetor(consumoMes){ //Soma os totais do mes/ano e adiciona no array
+                somaConsumoMes.push(consumoMes.reduce((a,b) => a+parseInt(b.total),0))
+            }
+
         }
         somaTotalMes();
     },[potenciaConsumida])
-
-   //console.log(valoresMeses)
+// array de configuração do gráfico
     const data = {
-        
         labels: meses,
         datasets: [
             {
@@ -104,6 +105,8 @@ function Dashboard(){
             }
         ]
     };
+// Coleta dados das unidades, calcula o número de unidades e quais estão ativas 
+// Coleta dados de consumo e soma o total geral
     useEffect(() => {
         async function handleGetUnits() {
             const response = await fetch(
@@ -124,9 +127,9 @@ function Dashboard(){
         handleGetUnits();
         handleGetTotal();
     }, [])
+   // Monta a tela
    return (
         <Container>
-            
             <ContainerMenu>
                 <Menu/>
             </ContainerMenu>
@@ -153,8 +156,9 @@ function Dashboard(){
                    </ContainerSuperior>
                     <h3>Consumo Mensal</h3>
                     <ContainerInferior>
-                        <Line data={data}/>
-                        
+                        <CentralizaGrafico>
+                            <Line data={data}/>
+                        </CentralizaGrafico>
                    </ContainerInferior>
                </ContainerFundo>
             </ContainerPage>

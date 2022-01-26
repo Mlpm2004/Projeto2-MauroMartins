@@ -3,7 +3,8 @@ import  {useEffect,useState} from "react";
 import Menu from '../../components/Menu';
 import Input from '../../forms/input';
 import Select from "../../forms/select";
-import {ContainerPage,Container,ContainerMenu,ContainerFundo,DivComponent,DivComponentButton} from './style'
+import {ContainerPage,Container,ContainerMenu} from '../../style'
+import {ContainerFundo,DivComponent,DivComponentButton} from './style'
 import Button from "../../forms/button";
 import {toast} from 'react-toastify';
 function EnergiaGerada(){
@@ -13,12 +14,11 @@ function EnergiaGerada(){
     const [optionUnidadeGeradora,setOptionUnidadeGeradora] =useState('')
     const urlBuscaoptions=`http://localhost:3333/unidades`;
     const urlGravaGeracao=`http://localhost:3333/geracoes`;
-    console.log(optionUnidadeGeradora)
-    useEffect(()=>{
+    useEffect(()=>{ 
         async function handleGetOptions(){
-            const response = await fetch(urlBuscaoptions);
+            const response = await fetch(urlBuscaoptions); //Carrega base de unidades cadastradas
             const data = await response.json();
-            const options = data.map((item)=>{
+            const options = data.map((item)=>{ // retorna array com as informações para compor as options do select
                 return{
                     valor:item.id,
                     texto:item.apelido
@@ -28,16 +28,16 @@ function EnergiaGerada(){
         }
         handleGetOptions();
     },[])
-    async function handleSaveUnit(event){
+    async function handleSaveUnit(event){ // Salva geração
         event.preventDefault();
-        if (optionUnidadeGeradora=="") {
+        if (optionUnidadeGeradora=="") {// Verifica se todos os campos foram preenchidos
             toast.warning('Selecione uma Unidade Geradora')
         }else if (periodo=="") {
             toast.warning('Mes/Ano é Obrigatório')
         }else if (total=="") {
             toast.warning('Total Kw é Obrigatório')
         }else{                    
-            try {
+            try { // Grava no JSON
                 await fetch(urlGravaGeracao,
                     {
                     method: 'POST',
@@ -49,11 +49,13 @@ function EnergiaGerada(){
                     })},
                 )
                 toast.success('Lançamento Realizado com Sucesso')
+                //Limpa os campos para uma nova inserção
+                setUnidadeOptions(unidadeOptions)
+                setPeriodo('')
+                setTotal('')
             } catch (error) {
-                
             }
         }
-
     }
     return (
         <Container>

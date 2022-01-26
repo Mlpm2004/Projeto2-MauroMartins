@@ -1,20 +1,20 @@
+// DEPENDÊNCIAS
 import './App.css';
-import Login from '../src/components/Login'
+import Login from './pages/Login'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Routes, Route } from 'react-router-dom';
-import Home from './pages/home';
 import Dashboard from './pages/dashboard';
 import UnidadeConsumidora from './pages/unidadeconsumidora';
 import EnergiaGerada from './pages/energiagerada';
 import Cadastro from './pages/editaunidade';
-import { LoginProvider } from './context/login';
 function App() {
   return (
-      <LoginProvider>
+// Routes cria as rotas
+// ToastContainer cria div para os avisos do toast
+<>
           <Routes>
               <Route path="/" element={<Login/>} />
-              <Route path="/home" element={<Home/>} />
               <Route path="/dashboard" element={<Dashboard/>} />
               <Route path="/unidades" element={<UnidadeConsumidora/>} />
               <Route path="/geracoes" element={<EnergiaGerada/>} />
@@ -22,7 +22,7 @@ function App() {
               <Route path="/editaunidade" element={<Cadastro/>} />
           </Routes>
           <ToastContainer />
-      </LoginProvider>
+</>
   
   );
 }

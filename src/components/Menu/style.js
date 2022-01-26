@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-
+/* folhas de estilo que irão formatar a tela de Menu*/
 export const Container = styled.div`
     width:200px;
     heigth:100%;
@@ -40,4 +40,12 @@ export const LinhaBotao=styled.div`
     margin:20px;
     heigth:50px;
 
+`;
+export const Saudacao=styled.div`
+    heigth:30px;
+    padding:10px;
+    border-radius:0.5rem;
+    background-color:orange;
+    font-size:12px;
+    font-weight:bold;
 `;

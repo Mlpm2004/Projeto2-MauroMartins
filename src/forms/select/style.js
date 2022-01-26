@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const Externo= styled.div`
     display:flex;
     flex-direction:column;
-
 `;
 
 export const Selectformat=styled.select`
@@ -14,7 +13,6 @@ export const Selectformat=styled.select`
     &:focus{
         color-border:#EC6D08;
     }
-
 `;
 
 export const SelectDescription=styled.label`
