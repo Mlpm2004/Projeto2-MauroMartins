@@ -151,7 +151,7 @@ function Dashboard(){
                         </Card>
                         <Card>
                             <TituloCard>Media de Energia</TituloCard>    
-                            <InfoCard>{(media/totalUnidades).toFixed(2)}</InfoCard>    
+                            <InfoCard>{(media/totalUnidades).toFixed(2)}kW</InfoCard>    
                         </Card>
                    </ContainerSuperior>
                     <h3>Consumo Mensal</h3>
